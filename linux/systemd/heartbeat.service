@@ -1,0 +1,10 @@
+[Unit]
+Description=Heartbeat
+
+[Service]
+User=user1
+ExecStart=/bin/bash /home/user1/bin/heartbeat
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

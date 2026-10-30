@@ -1,0 +1,6 @@
+# logs
+.log
+
+# TLS keys and certificate
+.key
+.crt

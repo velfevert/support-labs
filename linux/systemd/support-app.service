@@ -1,0 +1,12 @@
+[Unit]
+Description=Support training application
+After=network.target
+
+[Service]
+User=user1
+WorkingDirectory=/home/user1/support-labs/app
+ExecStart=/usr/bin/python3 /home/user1/support-labs/app/app.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
