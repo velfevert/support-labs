@@ -7,10 +7,9 @@
 #### **Диагностика**
 
 1. Проверяем работу nginx, он должен возвращать 502 `curl -i -H 'Host: support.local' http:/127.0.0.1/`
-2. Смотрим журнал запросов `tail -n 5 /var/log/nginx/support-access.log`: `upstream=127.0.0.1:8080` - это тот апстрим, который выбрал nginx, время установления соединения и получения заголовков не зафиксированы, поэтому он сам зафиксировал ошибку `upstream_status=502`
-3. Чтобы узнать причину 502, открываем журнал ошибок `tail -n 5 /val/log/nginx/support-access.log`, сообщение типа `connect() failed (111: Connection refused) while connecting to upstream` подтверждает отказ на подключения
-4. Проверяем состояние backend `systemctl status support-app.service` --> `inactive (dead)` = процесс остановлен
-5. `sudo ss -lntp 'sport = :8080'` проверяем, слушает ли какое-нибудь приложение порт 8080
+2. Смотрим журнал error.log, чтобы узнать причину 502 `tail -n 5 /val/log/nginx/error.log`, сообщение `connect() failed (111: Connection refused) while connecting to upstream` означает, что nginx получает RST от upstream при попытке подкючения
+3. Проверяем состояние backend `systemctl status support-app.service` --> `inactive (dead)` = процесс остановлен
+4. `sudo ss -lntp 'sport = :8080'` проверяем, слушает ли какое-нибудь приложение порт 8080
 
 #### **Причина**
 

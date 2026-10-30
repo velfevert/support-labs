@@ -11,7 +11,7 @@ if self.path == "/crash":
 
 #### **Диагностика**
 
-1. `curl -i --H 'Host: support.local' http://127.0.0.1/`, если он возвращает 200, значит бэкенд работает и слушает порт, ошибка возникает при `GET /crash`
+1. `curl -i -H 'Host: support.local' http://127.0.0.1/`, если он возвращает 200, значит бэкенд работает и слушает порт, ошибка возникает при `GET /crash`
 2. Смотрим по журналу ошибок, почему nginx получал 502
 ```
 upstream prematurely closed connection
@@ -22,10 +22,9 @@ while reading response header from upstream
 
 В журнале будет следующее:
 ```
-File /home/user1/support-lab/app/app.py, line 12, in do_GET raise RuntimeError("Simaluted backend failure.")
-RuntimeError: Simaluted backend failure.
+File /home/user1/support-labs/app/app.py, line 12, in do_GET raise RuntimeError("Simulated backend failure.")
+RuntimeError: Simulated backend failure.
 ```
-По выводу можно локализировать причину
 
 #### **Причина**
 

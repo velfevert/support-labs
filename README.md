@@ -15,7 +15,7 @@
 
 Слушает порт 80, принимает запросы и проксирует их на 127.0.0.1:8080 `proxy_pass http://127.0.0.1:8080`
 
-Использует отдельный журнал `support-access.log` с пользовательским форматом `support`. Формат журнала: [[nginx/log-format.conf|log_format]]. Объявляется в блоке `http`, применяется только на хосте support.local.
+Использует отдельный журнал `support-access.log` с пользовательским форматом `support`. Формат журнала: [log_format.conf](nginx/log_format.conf). Объявляется в блоке `http`, применяется только на хосте support.local.
 
 Архитектура обратного прокси:
 ```
@@ -25,7 +25,7 @@ Client ——————> Nginx ——————————————> 127
 
 **Статика - `static.local`**
 
-static.local обслуживает небольшую HTML страницу с CSS. В лабе исходники [[notes/static-site/index.html|index.html]] и [[notes/static-site/style.css|style.css]] находились в домашнем каталоге и копировались в /var/www/static/.
+static.local обслуживает небольшую HTML страницу с CSS. В лабе исходники [index.html](notes/static-site/index.html) и [style.css](notes/static-site/style.css) находились в домашнем каталоге и копировались в /var/www/static/.
 
 - Редирект HTTP → HTTPS (`301 Moved Permanently`) и самоподписанный TLS-сертификат. Как создать и проверить: [tls-certificate](docs/runbooks/tls-certificate.md).
 - Заголовки безопасности: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Content-Security-Policy: default-src 'self'; frame-ancestors 'none', Strict-Transport-Security: max-age=3600
