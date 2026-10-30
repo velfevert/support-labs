@@ -16,7 +16,7 @@ systemd: ... Scheduler restart job, restart counter is at 5.
 systemd: ... Start reaquest repeated too quickly.
 systemd: Failed to start support-app.service - Support training application
 ```
-Приложение пишет, что адрес уже занят, сразу завершается, systemd слишком часто пытался запускать сервис за короткий промежуток времени.
+Приложение пишет, что адрес уже занят и сразу завершается, systemd слишком часто запускал сервис за короткий промежуток времени и сообщил об ошибке запуска.
 
 3. `sudo ss -lntp 'sport = :8080` смотрим какой процесс занимает порт 8080
 4. Что это за процесс `ps -o user,pid,ppid,tt,cmd`, видим команду, которой был запущен процесс, также у него есть tty и его родителем является текущая оболочка, то есть процесс запущен вручную, не через systemd
@@ -25,7 +25,7 @@ systemd: Failed to start support-app.service - Support training application
 
 1. Выясняем, кому приндлежит порт, нужен ли этот процесс
 2. `kill <pid>`, в крайнем случае `kill -9 <pid>`
-3. `reset-failed` явно сбрасывает состояние `failed` и счётчики неудачных стартов. Через некоторое время лимит самостоятельно откатывается
+3. `reset-failed` явно сбрасывает состояние `failed` и счётчики неудачных стартов; через несколько секунд ограничение откатится автоматически
 ```
 sudo systemctl reset-failed support-app.service
 sudo systemctl start support-app.service

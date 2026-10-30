@@ -1,7 +1,7 @@
 
-`sudo systemctl daemon-reload` говорит systemd перечитать unit-файлы с диска (/etc/systemd/system и /usr/lib/systemd) и обновить свою внутреннюю конфигурацию. Выполняется после создания или изменения unit-файла.
+`sudo systemctl daemon-reload` говорит systemd перечитать unit-файлы с диска (/etc/systemd/system и /usr/lib/systemd) и обновить свою внутреннюю конфигурации; выполняется после создания или изменения unit-файла.
 
-`sudo systemctl reload nginx` заставляет запущенный сервис перечитать свой конфиг; не все сервисы позволяют выполнить релоад
+`sudo systemctl reload nginx` заставляет запущенный сервис перечитать свой конфиг; не все сервисы имеют возможность выполнить релоад
 
 `sudo systemctl restart support-app.service` стоп - старт сервиса
 

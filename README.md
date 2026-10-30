@@ -29,7 +29,7 @@ static.local обслуживает небольшую HTML страницу с 
 
 - Редирект HTTP → HTTPS (`301 Moved Permanently`) и самоподписанный TLS-сертификат. Как создать и проверить: [tls-certificate](docs/runbooks/tls-certificate.md).
 - Заголовки безопасности: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Content-Security-Policy: default-src 'self'; frame-ancestors 'none', Strict-Transport-Security: max-age=3600
-- Кэширование CSS: `expires 1h`, gzip для CSS и JS: [cache-gzip](docs/notes/http-cache-gzip.md)
+- Кэширование CSS: `expires 1h`, gzip для CSS и JS: [cache-gzip](docs/notes/http-cache+gzip.md)
 - Ограничение частоты запросов - rate limiting
 - Ответ `404`, если файл не найден
 - Файлы копируются в `/var/www/static/`. [static-permission](docs/runbooks/nginx-static-403-permissions.md)
@@ -40,23 +40,32 @@ static.local обслуживает небольшую HTML страницу с 
 support-labs/
 ├── README.md
 ├── app/
-│   └── app.py                          
+│   └── app.py
 ├── linux/
 │   └── systemd/
-│       ├── heartbeat                   
+│       ├── heartbeat
 │       ├── heartbeat.service
 │       └── support-app.service
 ├── nginx/
-│   ├── log-format.conf                                
-│   ├── support-app.conf                
-│   ├── static-site.conf                
+│   ├── log-format.conf
+│   ├── support-app.conf
+│   ├── static-site.conf
 │   └── static-site/
 │       ├── index.html
 │       └── style.css
 └── docs/
-    ├── incidents/                      
-    ├── runbooks/                       
-    └── notes/                          
+    ├── incidents/
+    │   ├── INC-001-backend-unavailable.md
+    │   ├── INC-002-upstream-connection-closed.md
+    │   ├── INC-003-upstream-timeout.md
+    │   └── INC-004-port-conflict.md
+    ├── runbooks/
+    │   ├── nginx-static-403-permissions.md
+    │   ├── restart-services.md
+    │   └── tls-certificate.md
+    └── notes/
+        ├── http-cache+gzip.md
+        └── nginx-static-403-permissions.md
 ```
 
 ### Быстрый старт

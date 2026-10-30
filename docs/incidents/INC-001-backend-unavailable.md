@@ -1,6 +1,3 @@
----
-создал заметку: "2026-10-28"
----
 ### 502, connection refused
  
  `http://support.local/` возвращает 502 bad gateway.
