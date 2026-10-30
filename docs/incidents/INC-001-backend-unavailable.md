@@ -6,14 +6,14 @@
 
 #### **Диагностика**
 
-1. Проверяем работу nginx, он должен возвращать 502 `curl -i -H 'Host: support.local' http:/127.0.0.1/`
-2. Смотрим журнал error.log, чтобы узнать причину 502 `tail -n 5 /val/log/nginx/error.log`, сообщение `connect() failed (111: Connection refused) while connecting to upstream` означает, что nginx получает RST от upstream при попытке подкючения
+1. Проверяем работу nginx, он должен возвращать 502 `curl -i -H 'Host: support.local' http://127.0.0.1/`
+2. Смотрим журнал error.log, чтобы узнать причину 502 `tail -n 5 /var/log/nginx/error.log`, сообщение `connect() failed (111: Connection refused) while connecting to upstream` означает, что nginx получает RST от upstream при попытке подкючения
 3. Проверяем состояние backend `systemctl status support-app.service` --> `inactive (dead)` = процесс остановлен
 4. `sudo ss -lntp 'sport = :8080'` проверяем, слушает ли какое-нибудь приложение порт 8080
 
 #### **Причина**
 
-Сервис остановлен командой `systemctl stop`. На сокете 127.0.0.1:8080 нет процесса, который может принять соединение, и ngnix формирует `502`. В реальном инциденте на этом шаге нужно выяснить, почему сервис остановился (`journalctl -u support-app`). В лабе причина известна.
+Сервис остановлен командой `systemctl stop`. На сокете 127.0.0.1:8080 нет процесса, который может принять соединение, и nginx формирует `502`. В реальном инциденте на этом шаге нужно выяснить, почему сервис остановился (`journalctl -u support-app`). В лабе причина известна.
 
 #### **Восстановление**
 
