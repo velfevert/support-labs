@@ -13,7 +13,7 @@ python3[<pid>]: OSError: [Errno 98] Address already in use
 systemd[1]: support-app.service: Main process exited, code=exited, status=1/FAILURE
 systemd: ... Failed with result 'exit-code'
 systemd: ... Scheduler restart job, restart counter is at 5.
-systemd: ... Start reaquest repeated too quickly.
+systemd: ... Start request repeated too quickly.
 systemd: Failed to start support-app.service - Support training application
 ```
 Приложение пишет, что адрес уже занят и сразу завершается, systemd слишком часто запускал сервис за короткий промежуток времени и сообщил об ошибке запуска.
